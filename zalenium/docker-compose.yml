@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  zalenium:
+    image: "dosel/zalenium"
+    container_name: zalenium
+    hostname: zalenium
+    tty: true
+    volumes:
+      - /tmp/videos:/home/seluser/videos
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+    ports:
+      - 4444:4444
+    command: >
+      start --desiredContainers 8
+            --maxTestSessions 1
+            --maxDockerSeleniumContainers 10
+            --screenWidth 1920 --screenHeight 1080
+            --timeZone "Asia/Ho_Chi_Minh"
+            --videoRecordingEnabled true
+    environment:
+      - PULL_SELENIUM_IMAGE=true
